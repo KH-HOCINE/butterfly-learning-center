@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
-import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 import './Footer.css';
 
 const Footer = () => {
@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="footer-container">
         {/* Colonne 1 : Infos & Logo */}
         <div className="footer-col">
-          <h3>Butterfly Learning Center</h3>
+          <h3>Butterfly Learning Center 🦋 </h3>
           <p>
             École de langues et de formations professionnelles pour enfants et adultes. 
             Développez vos compétences et évoluez avec confiance.
@@ -56,6 +56,14 @@ const Footer = () => {
               title="Instagram"
             >
               <FaInstagram size={18} />
+            </a>
+            <a 
+              href="https://www.tiktok.com/@butterflylc2013?_r=1&_t=ZS-99Vnt2LtfvA" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="TikTok"
+            >
+              <FaTiktok size={18} />
             </a>
           </div>
         </div>
