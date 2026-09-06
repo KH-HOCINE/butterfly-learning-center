@@ -37,18 +37,18 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-container">
-        {/* Logo */}
+        {/* Logo et Texte inversés (texte à gauche, image plus grande à droite) */}
         <div 
           className="logo-container" 
           onClick={(e) => handleNavClick(e, 'home')} 
-          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}
+          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px' }}
         >
+          <span className="logo-text">Butterfly Learning Center</span>
           <img 
             src={logoImage} 
             alt="Logo Butterfly" 
-            style={{ width: '38px', height: '38px', objectFit: 'contain' }} 
+            style={{ width: '50px', height: '50px', objectFit: 'contain' }} 
           />
-          <span className="logo-text">Butterfly Learning Center</span>
         </div>
 
         {/* Navigation Desktop */}
