@@ -58,17 +58,8 @@ const Header = () => {
           <a href="#reviews" onClick={(e) => handleNavClick(e, 'reviews')} className="nav-link">Avis</a>
         </nav>
 
-        {/* Sélecteur de langues (3 langues) */}
+        
         <div className="header-actions">
-          <div className="lang-selector">
-            <Globe size={18} />
-            <select value={currentLang} onChange={handleLanguageChange}>
-              <option value="FR">Français</option>
-              <option value="EN">English</option>
-              <option value="AR">العربية</option>
-            </select>
-          </div>
-
           {/* Bouton menu mobile */}
           <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
