@@ -14,7 +14,7 @@ const Home = () => {
       <section className="hero-section" id="home">
         <div className="hero-container-split">
           <div className="hero-content">
-            <span className="hero-badge">🦋 Butterfly Learning Center</span>
+            
             <h1>Apprenez, développez vos compétences, évoluez avec confiance</h1>
             <p>École de langues et de formations professionnelles pour enfants et adultes. Des programmes sur-mesure pour chaque étape de votre apprentissage.</p>
             <div className="hero-buttons">
