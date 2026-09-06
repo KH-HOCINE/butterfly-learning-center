@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Globe, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import logoImage from '../assets/logo.png';
 import './Header.css';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('FR');
   const navigate = useNavigate();
   const location = useLocation();
-
-  const handleLanguageChange = (e) => {
-    setCurrentLang(e.target.value);
-  };
 
   const handleNavClick = (e, sectionId) => {
     e.preventDefault();
@@ -37,13 +32,13 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-container">
-        {/* Logo agrandi à 70px et positionné à droite du texte */}
+        {/* Logo à 70px, texte à gauche sur PC et masqué sur mobile */}
         <div 
           className="logo-container" 
           onClick={(e) => handleNavClick(e, 'home')} 
           style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '14px' }}
         >
-          <span className="logo-text">Butterfly Learning Center</span>
+          <span className="logo-text desktop-only-text">Butterfly Learning Center</span>
           <img 
             src={logoImage} 
             alt="Logo Butterfly" 
@@ -51,13 +46,13 @@ const Header = () => {
           />
         </div>
 
-        {/* Navigation Desktop */}
+        {/* Navigation Desktop alignée à droite */}
         <nav className={`nav-menu ${isOpen ? 'active' : ''}`}>
           <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className="nav-link">Accueil</a>
           <a href="#notices" onClick={(e) => handleNavClick(e, 'notices')} className="nav-link">Annonces</a>
           <a href="#reviews" onClick={(e) => handleNavClick(e, 'reviews')} className="nav-link">Avis</a>
+          <a href="#footer" onClick={(e) => handleNavClick(e, 'footer')} className="nav-link">Contact</a>
         </nav>
-
         
         <div className="header-actions">
           {/* Bouton menu mobile */}
