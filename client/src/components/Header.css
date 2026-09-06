@@ -37,6 +37,8 @@
   display: flex;
   gap: 2rem;
   align-items: center;
+  margin-left: auto; /* Pousse tout le menu vers la droite */
+  margin-right: 2rem;
 }
 
 .nav-link {
