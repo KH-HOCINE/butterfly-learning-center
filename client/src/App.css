@@ -1,11 +1,9 @@
-/* Style global de la page d'accueil */
 .home-page {
   background-color: #ffffff;
   color: #1e293b;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Section Hero avec un fond rose très doux */
 .hero-section {
   background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
   color: #1e293b;
@@ -98,25 +96,23 @@
   border-color: #94a3b8;
 }
 
-/* Partie Image avec remplissage complet et application de la vague */
 .hero-image-wrapper {
   flex: 1;
   height: 540px;
   position: relative;
   overflow: hidden;
   display: flex;
-  align-items: stretch;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero-img {
+.hero-img-transparent {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  clip-path: url(#waveClip);
+  object-fit: contain; /* Affiche l'image en entier sans la rogner sur mobile et desktop */
   display: block;
 }
 
-/* Responsive pour les écrans mobiles */
 @media (max-width: 968px) {
   .hero-container-split {
     flex-direction: column;
@@ -131,9 +127,7 @@
   }
   .hero-image-wrapper {
     width: 100%;
-    height: 350px;
-  }
-  .hero-img {
-    clip-path: none;
+    height: 320px;
+    padding: 1rem;
   }
 }

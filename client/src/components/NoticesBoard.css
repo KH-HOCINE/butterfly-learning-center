@@ -1,5 +1,5 @@
 .notices-section {
-  width: 1240px; /* Légèrement élargi pour laisser de la place aux flèches sur les côtés */
+  width: 1240px;
   max-width: 100%;
   margin: 3rem auto;
   padding: 0 1rem;
@@ -16,7 +16,7 @@
   justify-content: center;
   gap: 10px;
   color: #ec4899;
- font-size: 3.2rem;
+  font-size: 3.2rem;
   margin-bottom: 0;
 }
 
@@ -29,16 +29,14 @@
   margin-bottom: 2rem;
 }
 
-/* Conteneur global du carrousel avec position relative */
 .notices-carousel-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 3rem; /* Espace réservé pour les flèches sur les côtés */
+  padding: 0 3rem;
 }
 
-/* Style des boutons fléchés latéraux au milieu de la hauteur des cartes */
 .scroll-btn {
   position: absolute;
   top: 50%;
@@ -65,14 +63,13 @@
 }
 
 .scroll-btn-left {
-  left: 0; /* Collé à gauche du carrousel */
+  left: 0;
 }
 
 .scroll-btn-right {
-  right: 0; /* Collé à droite du carrousel */
+  right: 0;
 }
 
-/* Encapsulation stricte pour cacher tout dépassement */
 .notices-slider-wrapper {
   width: 100%;
   overflow: hidden;
@@ -94,8 +91,8 @@
 
 .notices-track {
   display: flex;
-  gap: 1.5Rem;
-  Width: Max-content;
+  gap: 1.5rem;
+  width: max-content;
 }
 
 .notice-card {
@@ -109,9 +106,7 @@
   background: #fffdf9;
   padding: 1.75rem 1.5rem 1.5rem;
   border-radius: 4px 16px 4px 16px;
-  box-shadow:
-    0 1px 2px rgba(41, 37, 36, 0.06),
-    0 10px 20px -14px rgba(41, 37, 36, 0.25);
+  box-shadow: 0 1px 2px rgba(41, 37, 36, 0.06), 0 10px 20px -14px rgba(41, 37, 36, 0.25);
   text-align: left;
   transform: rotate(var(--tilt, -0.6deg));
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -123,9 +118,7 @@
 
 .notice-card:hover {
   transform: rotate(0deg) translateY(-5px);
-  box-shadow:
-    0 1px 2px rgba(41, 37, 36, 0.08),
-    0 18px 28px -16px rgba(41, 37, 36, 0.32);
+  box-shadow: 0 1px 2px rgba(41, 37, 36, 0.08), 0 18px 28px -16px rgba(41, 37, 36, 0.32);
 }
 
 .notice-card.urgent {
@@ -176,7 +169,6 @@
   line-height: 1.5;
 }
 
-/* Image et effet au survol */
 .notice-image-container {
   margin-top: 1.1rem;
   border-radius: 8px;
@@ -217,70 +209,26 @@
   transform: translateY(0);
 }
 
-/* Fenêtre Modale (Lightbox) */
-.image-modal-backdrop {
-  Position: fixed;
-  Top: 0;
-  Left: 0;
-  Width: 100vw;
-  Height: 100vh;
-  Background: rgba(0, 0, 0, 0.8);
-  Display: flex;
-  Align-items: center;
-  Justify-content: center;
-  Z-index: 1000;
-  Padding: 2rem;
-}
-
-.image-modal-content {
-  Position: relative;
-  Max-width: 90%;
-  Max-height: 90vh;
-}
-
-.modal-full-img {
-  Width: 100%;
-  Height: auto;
-  Max-height: 85vh;
-  Object-fit: contain;
-  Border-radius: 8px;
-  Box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
-
-.modal-close-btn {
-  Position: absolute;
-  Top: -40px;
-  Right: 0;
-  Background: white;
-  Border: none;
-  Border-radius: 50%;
-  Width: 36px;
-  Height: 36px;
-  Display: flex;
-  Align-items: center;
-  Justify-content: center;
-  Cursor: pointer;
-  Box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  Transition: background 0.2s;
-}
-
-.modal-close-btn:hover {
-  Background: #ef4444;
-  Color: white;
-}
-
 .no-notices {
   text-align: center;
   padding: 2.5rem 2rem;
   background: #fffdf9;
   border-radius: 4px 16px 4px 16px;
-  box-shadow:
-    0 1px 2px rgba(41, 37, 36, 0.06),
-    0 10px 20px -14px rgba(41, 37, 36, 0.25);
+  box-shadow: 0 1px 2px rgba(41, 37, 36, 0.06), 0 10px 20px -14px rgba(41, 37, 36, 0.25);
   color: #78716c;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .notices-carousel-wrapper {
+    padding: 0 2.2rem;
+  }
+  .scroll-btn {
+    width: 34px;
+    height: 34px;
+  }
 }
