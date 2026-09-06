@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Globe, Menu, X } from 'lucide-react';
+import logoImage from '../assets/logo.png';
 import './Header.css';
 
 const Header = () => {
@@ -37,7 +38,16 @@ const Header = () => {
     <header className="header">
       <div className="header-container">
         {/* Logo */}
-        <div className="logo-container" onClick={(e) => handleNavClick(e, 'home')} style={{ cursor: 'pointer' }}>
+        <div 
+          className="logo-container" 
+          onClick={(e) => handleNavClick(e, 'home')} 
+          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}
+        >
+          <img 
+            src={logoImage} 
+            alt="Logo Butterfly" 
+            style={{ width: '38px', height: '38px', objectFit: 'contain' }} 
+          />
           <span className="logo-text">Butterfly Learning Center</span>
         </div>
 
