@@ -1,0 +1,78 @@
+.footer {
+  background-color: #ffffff;
+  color: #334155;
+  padding-top: 3rem;
+  margin-top: 0;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Le titre principal reste rose */
+.footer-col h3 {
+  color: #ec4899; 
+}
+
+/* Tous les sous-titres (h4), y compris "Contact & Localisation" et "Suivez-nous", passent en rose */
+.footer-col h4 {
+  color: #ec4899;
+  margin-bottom: 1rem;
+}
+
+.footer-col p {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #475569;
+}
+
+.footer-col a {
+  color: #475569;
+}
+
+.footer-col a:hover {
+  color: #ec4899 !important;
+  transition: color 0.2s;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  background: #ffe4e6;
+  color: #ec4899;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.social-icons a:hover {
+  background: #ec4899;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}

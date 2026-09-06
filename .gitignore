@@ -1,0 +1,19 @@
+# Fichiers d'environnement et secrets
+.env
+*.local
+
+# Dépendances
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build et cache
+dist/
+dist-ssr/
+
+# Logs et éditeurs
+logs
+*.log
+.vscode/
+.idea/
+.DS_Store

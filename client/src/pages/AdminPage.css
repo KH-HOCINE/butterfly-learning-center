@@ -1,0 +1,243 @@
+.admin-page {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+.admin-top-bar {
+  background: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.back-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ec4899;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.back-home-btn:hover {
+  opacity: 0.8;
+}
+
+.admin-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Boîte de connexion moderne avec logo et rose */
+.admin-login-box {
+  max-width: 420px;
+  margin: 3rem auto;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.1);
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  text-align: center;
+}
+
+.admin-logo-wrapper {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-login-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.15);
+  background: #fdf2f8;
+  padding: 6px;
+}
+
+.admin-login-box h2 {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.admin-login-box h2 svg {
+  color: #ec4899;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.login-form input, .admin-form input, .admin-form textarea, .admin-form select {
+  padding: 0.85rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-form input:focus, .admin-form input:focus, .admin-form textarea:focus, .admin-form select:focus {
+  border-color: #ec4899;
+  box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15);
+}
+
+.login-form button, .admin-form button {
+  background: #ec4899;
+  color: white;
+  border: none;
+  padding: 0.85rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.25);
+}
+
+.login-form button:hover, .admin-form button:hover {
+  background: #db2777;
+  transform: translateY(-1px);
+}
+
+.error-msg {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Tableau de bord Admin */
+.admin-dashboard {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px -5px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.admin-header-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 1rem;
+}
+
+.admin-header-title h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1e293b;
+  font-size: 1.4rem;
+}
+
+.admin-header-title h2 svg {
+  color: #ec4899;
+}
+
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+.admin-success {
+  background: #fdf2f8;
+  color: #db2777;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid rgba(236, 72, 153, 0.2);
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #f8fafc;
+  padding: 1.75rem;
+  border-radius: 14px;
+  margin-bottom: 2rem;
+  border: 1px solid #e2e8f0;
+  border-top: 4px solid #ec4899;
+}
+
+.admin-form h3 {
+  color: #1e293b;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-form h3 svg {
+  color: #ec4899;
+}
+
+.management-section h3 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1e293b;
+  font-size: 1.2rem;
+  border-left: 4px solid #ec4899;
+  padding-left: 10px;
+}
+
+.manage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.manage-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.2s;
+}
+
+.manage-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.delete-btn {
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.delete-btn:hover {
+  background: #fecaca;
+}
