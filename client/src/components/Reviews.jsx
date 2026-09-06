@@ -110,8 +110,13 @@ const Reviews = () => {
           )}
 
           <div className="reviews-slider-wrapper">
-            <div className="reviews-slider-container" ref={scrollRef}>
-              <div className="reviews-track">
+            {/* Désactivation du défilement tactile/souris direct */}
+            <div 
+              className="reviews-slider-container" 
+              ref={scrollRef}
+              style={{ overflowX: 'hidden', pointerEvents: 'none' }}
+            >
+              <div className="reviews-track" style={{ pointerEvents: 'auto' }}>
                 {reviews.length > 0 ? (
                   reviews.map((review) => {
                     const isShortComment = review.comment.length <= SHORT_COMMENT_THRESHOLD;
