@@ -38,7 +38,8 @@ app.post('/api/notices', upload.single('image'), async (req, res) => {
     let imageUrl = '';
     
     if (req.file) {
-      const protocol = req.protocol;
+      // Force le protocole https pour éviter les problèmes de Mixed Content sur Vercel
+      const protocol = req.get('x-forwarded-proto') || 'https';
       const host = req.get('host');
       imageUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
     }
