@@ -2,20 +2,22 @@ const express = require('express');
 const router = express.Router();
 const Notice = require('../models/Notice');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
-// Configuration de Multer pour cette route
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, '../uploads');
-    if (!fs.existsSync(uploadDir)){
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
+// 1. Configuration de Cloudinary avec vos variables d'environnement
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// 2. Configuration de Multer pour envoyer directement sur Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'butterfly_notices', // Le dossier qui sera créé dans votre Cloudinary
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp']
   }
 });
 const upload = multer({ storage: storage });
@@ -43,16 +45,15 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST : Ajouter une nouvelle note avec gestion sécurisée de l'image (HTTPS)
+// POST : Ajouter une nouvelle note
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     const { title, content, category } = req.body;
     let imageUrl = '';
 
     if (req.file) {
-      const protocol = req.get('x-forwarded-proto') || 'https';
-      const host = req.get('host');
-      imageUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
+      // Cloudinary renvoie directement un lien HTTPS sécurisé dans req.file.path !
+      imageUrl = req.file.path; 
     }
 
     const newNotice = new Notice({ 
@@ -80,9 +81,8 @@ router.put('/:id', upload.single('image'), async (req, res) => {
     };
 
     if (req.file) {
-      const protocol = req.get('x-forwarded-proto') || 'https';
-      const host = req.get('host');
-      updateData.imageUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
+      // Si une nouvelle image est envoyée, on récupère le nouveau lien Cloudinary
+      updateData.imageUrl = req.file.path;
     }
 
     const updatedNotice = await Notice.findByIdAndUpdate(
