@@ -5,10 +5,6 @@ import { Link } from 'react-router-dom';
 import logoImage from '../assets/logo.png';
 import './AdminPage.css';
 
-// ==========================================
-// FORCE PUSH: Synchronisation Vercel UI
-// ==========================================
-
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const AdminPage = () => {
@@ -23,9 +19,7 @@ const AdminPage = () => {
   const [imageFile, setImageFile] = useState(null);
   const [successMsg, setSuccessMsg] = useState('');
   
-  // État pour suivre l'ID de l'annonce en cours de modification
   const [editingId, setEditingId] = useState(null);
-  // État pour la modale d'affichage d'image en grand dans l'admin
   const [previewImage, setPreviewImage] = useState(null);
 
   const ADMIN_SECRET = "butterfly2026";
@@ -64,20 +58,17 @@ const AdminPage = () => {
 
     try {
       if (editingId) {
-        // Mode Modification (PUT)
         await axios.put(`${API_URL}/api/notices/${editingId}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         setSuccessMsg('Note mise à jour avec succès !');
       } else {
-        // Mode Création (POST)
         await axios.post(`${API_URL}/api/notices`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         setSuccessMsg('Note importante publiée avec succès !');
       }
 
-      // Réinitialisation du formulaire
       setNotice({ title: '', content: '', category: 'Information' });
       setImageFile(null);
       setEditingId(null);
@@ -91,7 +82,6 @@ const AdminPage = () => {
     }
   };
 
-  // Charger une annonce dans le formulaire pour modification
   const handleEditClick = (n) => {
     setEditingId(n._id);
     setNotice({
@@ -226,12 +216,12 @@ const AdminPage = () => {
                   notices.map((n) => (
                     <div key={n._id} className="manage-item" style={{ alignItems: 'flex-start' }}>
                       <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start', flex: 1 }}>
-                        {/* Miniature cliquable pour visionner l'image */}
+                        {/* Application du replace() pour forcer le HTTPS */}
                         {n.imageUrl && (
                           <img 
-                            src={n.imageUrl} 
+                            src={n.imageUrl.replace('http://', 'https://')} 
                             alt="Miniature" 
-                            onClick={() => setPreviewImage(n.imageUrl)}
+                            onClick={() => setPreviewImage(n.imageUrl.replace('http://', 'https://'))}
                             style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px', cursor: 'pointer', border: '1px solid #cbd5e1' }}
                             title="Cliquez pour ouvrir l'image"
                           />

@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const noticeSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: false, // Rendu non obligatoire
+    required: false,
     trim: true,
     default: ''
   },
   content: {
     type: String,
-    required: false, // Rendu non obligatoire
+    required: false,
     default: ''
   },
   category: {

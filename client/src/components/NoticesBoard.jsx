@@ -65,7 +65,8 @@ const NoticesBoard = () => {
                       {notice.content && <p>{notice.content.substring(0, 100)}...</p>}
                       {notice.imageUrl && (
                         <div className="notice-image-container">
-                          <img src={notice.imageUrl} alt="Annonce illustration" className="notice-img" />
+                          {/* Force l'URL en HTTPS */}
+                          <img src={notice.imageUrl.replace('http://', 'https://')} alt="Annonce illustration" className="notice-img" />
                           <div className="image-overlay-hint">Cliquez pour lire plus</div>
                         </div>
                       )}

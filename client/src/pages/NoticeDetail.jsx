@@ -62,7 +62,8 @@ const NoticeDetail = () => {
 
             {notice.imageUrl && (
               <div className="notice-full-image-wrapper">
-                <img src={notice.imageUrl} alt={notice.title} className="notice-full-img" />
+                {/* Force l'URL en HTTPS */}
+                <img src={notice.imageUrl.replace('http://', 'https://')} alt={notice.title} className="notice-full-img" />
               </div>
             )}
           </article>
