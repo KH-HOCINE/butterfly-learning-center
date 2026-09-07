@@ -6,6 +6,10 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 
+// ==========================================
+// FORCE PUSH: Nettoyage et synchronisation
+// ==========================================
+
 const app = express();
 
 app.use(cors());

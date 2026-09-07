@@ -5,6 +5,10 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// ==========================================
+// FORCE PUSH: Déploiement de la route PUT
+// ==========================================
+
 // Configuration de Multer pour cette route également
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
