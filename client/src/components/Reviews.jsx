@@ -54,7 +54,7 @@ const Reviews = () => {
   return (
     <section className="reviews-section" id="reviews">
       <div className="reviews-container">
-        <h2>Témoignage</h2>
+        <h2>Témoignages </h2>
         <p className="section-subtitle">Découvrez les retours d'expérience des familles ou partagez le vôtre.</p>
 
         {msg && <p className="review-success-msg">{msg}</p>}
