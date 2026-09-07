@@ -174,16 +174,20 @@
 }
 
 @media (max-width: 768px) {
+  .reviews-section {
+    padding: 3rem 1rem; /* Réduit un peu les marges globales de la section */
+  }
   .reviews-carousel-wrapper {
-    padding: 0 2.2rem;
+    padding: 0 2rem; /* Réduit l'espace des flèches */
   }
   .scroll-btn {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
   }
   .review-card {
-    width: 320px;
-    min-width: 320px;
-    max-width: 320px;
+    width: 280px; /* Réduit la largeur de la carte pour qu'elle s'affiche en entier */
+    min-width: 280px;
+    max-width: 280px;
+    padding: 1.75rem 1.25rem; /* Ajuste le padding interne de la carte */
   }
 }
