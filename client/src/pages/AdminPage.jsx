@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Lock, Unlock, Trash2, PlusCircle, ArrowLeft } from 'lucide-react';
+import { Lock, Unlock, Trash2, PlusCircle, ArrowLeft, Edit3, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import logoImage from '../assets/logo.png';
 import './AdminPage.css';
@@ -18,6 +18,11 @@ const AdminPage = () => {
   const [notice, setNotice] = useState({ title: '', content: '', category: 'Information' });
   const [imageFile, setImageFile] = useState(null);
   const [successMsg, setSuccessMsg] = useState('');
+  
+  // État pour suivre l'ID de l'annonce en cours de modification
+  const [editingId, setEditingId] = useState(null);
+  // État pour la modale d'affichage d'image en grand dans l'admin
+  const [previewImage, setPreviewImage] = useState(null);
 
   const ADMIN_SECRET = "butterfly2026";
 
@@ -54,20 +59,49 @@ const AdminPage = () => {
     }
 
     try {
-      await axios.post(`${API_URL}/api/notices`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      setSuccessMsg('Note importante publiée avec succès !');
+      if (editingId) {
+        // Mode Modification (PUT)
+        await axios.put(`${API_URL}/api/notices/${editingId}`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        setSuccessMsg('Note mise à jour avec succès !');
+      } else {
+        // Mode Création (POST)
+        await axios.post(`${API_URL}/api/notices`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        setSuccessMsg('Note importante publiée avec succès !');
+      }
+
+      // Réinitialisation du formulaire
       setNotice({ title: '', content: '', category: 'Information' });
       setImageFile(null);
+      setEditingId(null);
       const fileInput = document.getElementById('notice-image-input');
       if (fileInput) fileInput.value = '';
 
       fetchData();
       setTimeout(() => setSuccessMsg(''), 4000);
     } catch (err) {
-      setSuccessMsg('Erreur lors de la publication.');
+      setSuccessMsg("Erreur lors de l'enregistrement.");
     }
+  };
+
+  // Charger une annonce dans le formulaire pour modification
+  const handleEditClick = (n) => {
+    setEditingId(n._id);
+    setNotice({
+      title: n.title || '',
+      content: n.content || '',
+      category: n.category || 'Information'
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    setNotice({ title: '', content: '', category: 'Information' });
+    setImageFile(null);
   };
 
   const handleDeleteNotice = async (id) => {
@@ -128,7 +162,11 @@ const AdminPage = () => {
 
             <div className="admin-grid-forms">
               <form onSubmit={handleNoticeSubmit} className="admin-form">
-                <h3><PlusCircle size={18} /> Publier une note importante (Champs optionnels)</h3>
+                <h3>
+                  <PlusCircle size={18} /> 
+                  {editingId ? "Modifier l'annonce" : "Publier une note importante (Champs optionnels)"}
+                </h3>
+                
                 <input 
                   type="text" 
                   placeholder="Titre de l'annonce (optionnel)" 
@@ -142,7 +180,9 @@ const AdminPage = () => {
                 />
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  <label style={{ fontSize: '0.85rem', color: '#64748b' }}>Ajouter une image depuis l'ordinateur (optionnel) :</label>
+                  <label style={{ fontSize: '0.85rem', color: '#64748b' }}>
+                    {editingId ? "Remplacer l'image (optionnel) :" : "Ajouter une image depuis l'ordinateur (optionnel) :"}
+                  </label>
                   <input 
                     id="notice-image-input"
                     type="file" 
@@ -161,7 +201,17 @@ const AdminPage = () => {
                   <option value="Inscription">Inscription</option>
                   <option value="Événement">Événement</option>
                 </select>
-                <button type="submit">Publier l'annonce</button>
+
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <button type="submit" style={{ flex: 1 }}>
+                    {editingId ? "Mettre à jour l'annonce" : "Publier l'annonce"}
+                  </button>
+                  {editingId && (
+                    <button type="button" onClick={handleCancelEdit} style={{ background: '#64748b', flex: 1 }}>
+                      Annuler
+                    </button>
+                  )}
+                </div>
               </form>
             </div>
 
@@ -170,15 +220,32 @@ const AdminPage = () => {
               <div className="manage-list">
                 {notices.length > 0 ? (
                   notices.map((n) => (
-                    <div key={n._id} className="manage-item">
-                      <div>
-                        <strong>{n.title || '(Sans titre)'}</strong> <span className="badge">{n.category}</span>
-                        <p>{n.content}</p>
-                        {n.imageUrl && <small style={{ color: '#ec4899' }}>📷 Image attachée</small>}
+                    <div key={n._id} className="manage-item" style={{ alignItems: 'flex-start' }}>
+                      <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start', flex: 1 }}>
+                        {/* Miniature cliquable pour visionner l'image */}
+                        {n.imageUrl && (
+                          <img 
+                            src={n.imageUrl} 
+                            alt="Miniature" 
+                            onClick={() => setPreviewImage(n.imageUrl)}
+                            style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px', cursor: 'pointer', border: '1px solid #cbd5e1' }}
+                            title="Cliquez pour ouvrir l'image"
+                          />
+                        )}
+                        <div>
+                          <strong>{n.title || '(Sans titre)'}</strong> <span className="badge">{n.category}</span>
+                          <p style={{ marginTop: '5px', color: '#475569' }}>{n.content}</p>
+                        </div>
                       </div>
-                      <button onClick={() => handleDeleteNotice(n._id)} className="delete-btn" title="Supprimer">
-                        <Trash2 size={18} />
-                      </button>
+
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <button onClick={() => handleEditClick(n)} className="edit-btn" title="Modifier" style={{ background: '#e0f2fe', color: '#0284c7', border: 'none', padding: '10px', borderRadius: '8px', cursor: 'pointer' }}>
+                          <Edit3 size={18} />
+                        </button>
+                        <button onClick={() => handleDeleteNotice(n._id)} className="delete-btn" title="Supprimer">
+                          <Trash2 size={18} />
+                        </button>
+                      </div>
                     </div>
                   ))
                 ) : (
@@ -208,6 +275,18 @@ const AdminPage = () => {
           </div>
         )}
       </div>
+
+      {/* Modale d'agrandissement d'image pour l'admin */}
+      {previewImage && (
+        <div className="image-modal-backdrop" onClick={() => setPreviewImage(null)} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000, padding: '2rem' }}>
+          <div style={{ position: 'relative', maxWidth: '90%', maxHeight: '90vh' }} onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setPreviewImage(null)} style={{ position: 'absolute', top: '-40px', right: '0', background: 'white', border: 'none', borderRadius: '50%', width: '36px', height: '36px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <X size={20} />
+            </button>
+            <img src={previewImage} alt="Agrandissement" style={{ width: '100%', height: 'auto', maxHeight: '85vh', objectFit: 'contain', borderRadius: '8px' }} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

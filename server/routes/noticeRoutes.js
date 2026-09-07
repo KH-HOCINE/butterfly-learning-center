@@ -69,6 +69,38 @@ router.post('/', upload.single('image'), async (req, res) => {
   }
 });
 
+// PUT : Modifier une note existante
+router.put('/:id', upload.single('image'), async (req, res) => {
+  try {
+    const { title, content, category } = req.body;
+    const updateData = { 
+      title: title || '', 
+      content: content || '', 
+      category: category || 'Information' 
+    };
+
+    if (req.file) {
+      const protocol = req.get('x-forwarded-proto') || 'https';
+      const host = req.get('host');
+      updateData.imageUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
+    }
+
+    const updatedNotice = await Notice.findByIdAndUpdate(
+      req.params.id, 
+      updateData, 
+      { new: true }
+    );
+
+    if (!updatedNotice) {
+      return res.status(404).json({ error: "Annonce non trouvée" });
+    }
+
+    res.json(updatedNotice);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 // DELETE : Supprimer une note importante
 router.delete('/:id', async (req, res) => {
   try {
