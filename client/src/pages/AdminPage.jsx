@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 import logoImage from '../assets/logo.png';
 import './AdminPage.css';
 
+// ==========================================
+// FORCE PUSH: Synchronisation Vercel UI
+// ==========================================
+
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const AdminPage = () => {
